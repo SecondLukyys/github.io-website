@@ -46,12 +46,14 @@
 									<p>The purpose of this solution is to show how different AI models can be used with API's</p>
 								</header>
 								<div class="image main"><img src="ComfyUI_temp_sbazg_00008_.png" alt="" /></div>
-								<p>For this static site I use JavaScript</p>
-								<br><br>
-
-								<input type="text" name="Prompt" id="promptInput" placeholder="Enter your prompt" value="" size="30" maxlength="50" required>	
+								<p>For this static site JavaScript is used to interact with Large Language Model. Model greets you with introduction:</p>
+								<br>
+								<div id="outputField0" style="white-space: pre-wrap; word-wrap: break-word;"></div>
+								<br>
+								<input type="text" name="Prompt" id="promptInput" placeholder="Enter your prompt" value="" size="5000" maxlength="50" required>
+								<br>
 								<a class="button large" id="runPromptButton" >Run prompt</a>
-								
+								<br>
 								<div id="outputField" style="white-space: pre-wrap; word-wrap: break-word;"></div>
 
 								<br><br><br><br>
@@ -59,7 +61,6 @@
 									<li><a href="jscode.html" class="button large">JavaScript code</a></li>
 								</ul>
 							</section>
-
 					</div>
 
 				<!-- Footer -->
@@ -85,49 +86,6 @@
 					</div>
 
 			</div>
-
-
-			<!--
-			<script>
-				async function sendPromptToGemini(prompt) {
-				const apiKey = "AIzaSyCfWIW9flAzt1HS8gMWNeMRegL8zyCVxrc"; // Replace with your actual API key
-				const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent";
-
-				const requestBody = {
-					contents: [
-					{
-						parts: [
-						{
-							text: prompt
-						}
-						]
-					}
-					]
-				};
-
-				const response = await fetch(url, {
-					method: 'POST',
-					headers: {
-					'Content-Type': 'application/json',
-					'Authorization': `Bearer ${apiKey}`
-					},
-					body:  
-				JSON.stringify(requestBody)
-				});
-
-				const data = await response.json();  
-
-				return data.candidates[0].parts[0].text;  // Access generated text
-				}
-
-				document.getElementById("runPromptButton").addEventListener("click", async function() {
-				const promptValue = document.getElementById("promptInput").value;
-				const response = await sendPromptToGemini(promptValue);
-				document.getElementById("outputField").innerHTML = "Response: " + response;
-				});
-			</script>
-			-->
-
 			
 			<script type="importmap">
 				{
@@ -147,18 +105,25 @@
 				const genAI = new GoogleGenerativeAI(API_KEY);
 				const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 			  
+				
+				const result0 = await model.generateContent("Write a little bit about yourself");
+				document.getElementById("outputField0").innerHTML = result0.response.text();
+
 				document.getElementById("runPromptButton").addEventListener("click", async function() {
 				  const prompt = document.getElementById("promptInput").value;
 				  const result = await model.generateContent(prompt);
 				  document.getElementById("outputField").innerHTML = result.response.text();
 				  console.log(result.response.text());
-
 				});
+
+
+				
+
 			  </script>
 
 
 
-		<!-- Scripts -->
+		<!-- Scripts --> 
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrollex.min.js"></script>
 			<script src="assets/js/jquery.scrolly.min.js"></script>
