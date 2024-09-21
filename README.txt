@@ -2,7 +2,7 @@ Applied a free, fully responsive HTML5 + CSS3 site template called Massively htt
 
 To use this code for your self you can clone repository with 
 
-https://github.com/SecondLukyys/github.io-website.git or download repository using Code button then then downloading zip file.
+git clone https://github.com/SecondLukyys/github.io-website.git or download repository using Code button then then downloading zip file.
 
 Then you can open index.html file to view contents in your browser.
 
